@@ -8,6 +8,7 @@ public class Producer {
     
     private String name;
     private String cpf;
+    private String id;
     private List<Product> products;
     private List<Sale> sales;
     private List<Sale> purchases;
