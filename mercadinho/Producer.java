@@ -14,13 +14,14 @@ public class Producer {
     private List<Sale> purchases;
     private double cash;
 
-    public Producer(String name, String cpf) {
+    public Producer(String name, String cpf,String id) {
         this.name = name;
         this.cpf = cpf;
         this.products = new ArrayList();
         this.sales = new ArrayList();
         this.purchases = new ArrayList();
         this.cash = 0;
+        this.id = id;
     }
     
     public List getProducts(){
@@ -109,6 +110,19 @@ public class Producer {
     
     public String getCpf(){
         return this.cpf;
+    }
+    
+    public String getId(){
+        return this.id;
+    }
+    
+    public void setId(String id){
+        this.id = id;
+    }
+    
+    @Override
+    public String toString(){
+        return this.name + "- " + this.cpf;
     }
     
     

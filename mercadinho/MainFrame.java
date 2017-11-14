@@ -6,8 +6,11 @@
 
 package mercadinho;
 
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -16,8 +19,15 @@ import java.util.List;
 public class MainFrame extends javax.swing.JFrame {
 
     /** Creates new form MainFrame */
+    List<Producer> prod;
+    
     public MainFrame(List<Producer> producers) {
         initComponents();
+        for(Producer p:producers){
+            this.cb_Producer.addItem(p.getName());
+        }
+        prod = producers;
+        
         
     }
 
@@ -55,6 +65,21 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel1.setLabelFor(tf_ProducerID);
         jLabel1.setText("Código do Produtor");
+
+        cb_Producer.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_ProducerItemStateChanged(evt);
+            }
+        });
+        cb_Producer.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                cb_ProducerPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel2.setLabelFor(cb_Producer);
@@ -146,7 +171,7 @@ public class MainFrame extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jButton1)))))
-                .addGap(386, 386, 386))
+                .addGap(392, 392, 392))
         );
 
         jTabbedPane1.addTab("Vendas", jPanel2);
@@ -159,7 +184,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 449, Short.MAX_VALUE)
+            .addGap(0, 455, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("tab1", jPanel3);
@@ -189,6 +214,20 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cb_ProducerItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_ProducerItemStateChanged
+        // TODO add your handling code here:
+//        System.out.println("ola");
+//        Producer p = (Producer) this.cb_Producer.getSelectedItem();
+//        System.out.println(p);
+        
+    }//GEN-LAST:event_cb_ProducerItemStateChanged
+
+    private void cb_ProducerPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cb_ProducerPopupMenuWillBecomeInvisible
+        // TODO add your handling code here:
+        System.out.print("oi");
+    }//GEN-LAST:event_cb_ProducerPopupMenuWillBecomeInvisible
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -219,12 +258,12 @@ public class MainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         List<Producer> producers = new ArrayList();
         //TODO - colocar parada para não poder adicionar dois produtores com o msm cpf
-        producers.add(new Producer("Joao","123456"));
-        producers.add(new Producer("Pedro","123456"));
-        producers.add(new Producer("Jesus","123456"));
-        producers.add(new Producer("Judas","123456"));
-        producers.add(new Producer("Tadeu","123456"));
-        producers.add(new Producer("Caio","123456"));
+        producers.add(new Producer("Joao","123456","1"));
+        producers.add(new Producer("Pedro","123456","2"));
+        producers.add(new Producer("Jesus","123456","3"));
+        producers.add(new Producer("Judas","123456","4"));
+        producers.add(new Producer("Tadeu","123456","5"));
+        producers.add(new Producer("Caio","123456","6"));
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
