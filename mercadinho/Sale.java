@@ -40,6 +40,11 @@ public class Sale {
     public void setSoldAt(Date soldAt) {
         this.soldAt = soldAt;
     }
+
+    @Override
+    public String toString() {
+        return "Sale{" + "product=" + product + ", amount=" + amount + ", soldAt=" + soldAt + '}';
+    }
     
     
 

@@ -53,6 +53,10 @@ public class Producer {
         return null;
     }
     
+    public List<Sale> getSales(){
+        return this.sales;
+    }
+    
     public Sale searchSale(Sale s){
         for(Sale sale:this.sales){
             if(sale.equals(s))
