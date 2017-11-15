@@ -587,6 +587,7 @@ public class MainFrame extends javax.swing.JFrame {
             producer.addSale(new Sale(((Product)this.cart.elementAt(i)),Double.parseDouble(this.js_amountToBuy.getValue().toString()),new Date()));
         }
         this.cart.removeAllElements();
+        System.out.println(producer.getSales().size());
         
     }//GEN-LAST:event_btn_buyMouseReleased
 
@@ -619,12 +620,19 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void btn_removeProducerMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_removeProducerMouseReleased
         // TODO add your handling code here:
-        
+        Producer p = (Producer)this.cb_producers_Produtores.getSelectedItem();
+        this.prod.remove(p);
+        this.model.removeAllElements();
+        System.out.println(this.prod.size());
+        this.producersModel.removeElement(p);
+        this.cb_producers_Produtores.setModel(this.producersModel);
     }//GEN-LAST:event_btn_removeProducerMouseReleased
 
     private void cb_producers_ProdutoresPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cb_producers_ProdutoresPopupMenuWillBecomeInvisible
         // TODO add your handling code here:
         Producer p = (Producer)this.cb_producers_Produtores.getSelectedItem();
+        this.list_sales.removeAll();
+        this.model.removeAllElements();
         this.tf_name.setText(p.getName());
         this.tf_id.setText(p.getId());
         for(Sale s:p.getSales()){
