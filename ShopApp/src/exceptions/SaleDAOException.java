@@ -1,16 +1,16 @@
 package exceptions;
 
-public class EstadoDAOException extends Exception {
+public class SaleDAOException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
-	public EstadoDAOException() {
+	public SaleDAOException() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public EstadoDAOException(String message) {
-		super("Erro em ProducerDAO "+message);
+	public SaleDAOException(String message) {
+		super("Erro em SaleDAO "+message);
 		// TODO Auto-generated constructor stub
 	}
 
