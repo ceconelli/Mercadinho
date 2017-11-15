@@ -13,7 +13,7 @@ public class ConnectionFactory {
 	public static Connection getConnection() throws Exception/*SQLException, ClassNotFoundException*/{
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
-			ConnectionFactory.conexao= DriverManager.getConnection("jdbc:mysql://localhost/agenda?user=root&password=root");
+			ConnectionFactory.conexao= DriverManager.getConnection("jdbc:mysql://localhost/mydb","root","123456");
 		}catch(Exception e){
 			throw new Exception("Erro ao conectar com o BD"+e.getMessage());
 		}
@@ -25,7 +25,7 @@ public class ConnectionFactory {
 		try{
 			conexao.close();
 		}catch(Exception e){
-			throw new Exception("Erro ao fechar conexão com o BD"+e.getMessage());
+			throw new Exception("Erro ao fechar conexï¿½o com o BD"+e.getMessage());
 		}	
 	}
 	
@@ -35,7 +35,7 @@ public class ConnectionFactory {
 			stm.close();
 			rs.close();
 		}catch(Exception e){
-			throw new Exception("Erro ao fechar conexão com o BD"+e.getMessage());
+			throw new Exception("Erro ao fechar conexï¿½o com o BD"+e.getMessage());
 		}
 	}
 	public static void closeConnection(Statement stm) throws Exception{
@@ -43,7 +43,7 @@ public class ConnectionFactory {
 			conexao.close();
 			stm.close();
 		}catch(Exception e){
-			throw new Exception("Erro ao fechar conexão com o BD"+e.getMessage());
+			throw new Exception("Erro ao fechar conexï¿½o com o BD"+e.getMessage());
 		}
 	}
 }
