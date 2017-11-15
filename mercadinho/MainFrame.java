@@ -10,7 +10,12 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JList;
+import javax.swing.MutableComboBoxModel;
 
 /**
  *
@@ -23,11 +28,17 @@ public class MainFrame extends javax.swing.JFrame {
     
     public MainFrame(List<Producer> producers) {
         initComponents();
-        for(Producer p:producers){
-            this.cb_Producer.addItem(p.getName());
-        }
-        prod = producers;
+        Producer[] pd = new Producer[producers.size()];
         
+        int i = 0;
+        for(Producer p:producers){
+            System.out.println(p.getCpf());
+            pd[i] = p;
+            i++;
+        }
+        
+        this.cb_Producer.setModel(new DefaultComboBoxModel(pd));
+        prod = producers;
         
     }
 
@@ -58,6 +69,8 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        list_producers = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,6 +79,12 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel1.setLabelFor(tf_ProducerID);
         jLabel1.setText("Código do Produtor");
+
+        tf_ProducerID.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tf_ProducerIDFocusLost(evt);
+            }
+        });
 
         cb_Producer.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -85,6 +104,12 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel2.setLabelFor(cb_Producer);
         jLabel2.setText("Produtor");
+
+        cb_product.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_productItemStateChanged(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel3.setLabelFor(cb_product);
@@ -177,15 +202,21 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Vendas", jPanel2);
 
+        jScrollPane1.setViewportView(list_producers);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 215, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 339, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -236,15 +267,60 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
 //        System.out.println("ola");
 //        Producer p = (Producer) this.cb_Producer.getSelectedItem();
-//        System.out.println(p);
+        System.out.println("caralho");
+        Producer p = (Producer)this.cb_Producer.getSelectedItem();
+        Product[] products = new Product[p.getProducts().size()];
+        int i = 0;
+        for(Product a:p.getProducts()){
+            products[i] = a;
+            i++;
+        }
+        this.cb_product.setModel(new DefaultComboBoxModel(products));
         
     }//GEN-LAST:event_cb_ProducerItemStateChanged
 
     private void cb_ProducerPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cb_ProducerPopupMenuWillBecomeInvisible
         // TODO add your handling code here:
-        System.out.print("oi");
+        Producer p = (Producer)this.cb_Producer.getSelectedItem();
+        System.out.println(p.getCpf());
+        this.tf_ProducerID.setText(p.getId());
+        Product[] products = new Product[p.getProducts().size()];
+        int i = 0;
+        for(Product a:p.getProducts()){
+            products[i] = a;
+            i++;
+        }
+        this.cb_product.setModel(new DefaultComboBoxModel(products));
     }//GEN-LAST:event_cb_ProducerPopupMenuWillBecomeInvisible
+
+    private void tf_ProducerIDFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_ProducerIDFocusLost
+        // TODO add your handling code here:
+//        System.out.println("oi");
+        for(Producer p:this.prod){
+            if(p.getId().equals(this.tf_ProducerID.getText())){
+                this.cb_Producer.setSelectedItem(p);
+            }
+        }
+    }//GEN-LAST:event_tf_ProducerIDFocusLost
+
+    private void cb_productItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_productItemStateChanged
+        // TODO add your handling code here:
+        Product p = (Product)this.cb_product.getSelectedItem();
+        this.label_availableAmount.setText(""+p.getAmount());
+        this.label_price.setText(""+p.getPrice());
+        System.out.println("entrou");
+    }//GEN-LAST:event_cb_productItemStateChanged
     
+    private Object[] getObjs(List<Object> list){
+        Object[] objs = new Object[list.size()];
+        int i = 0;
+        for(Object it:list){
+            objs[i] = it;
+            i++;
+        }
+        
+        return objs;
+    }
     
     /**
      * @param args the command line arguments
@@ -276,12 +352,12 @@ public class MainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         List<Producer> producers = new ArrayList();
         //TODO - colocar parada para não poder adicionar dois produtores com o msm cpf
-        producers.add(new Producer("Joao","123456","1"));
-        producers.add(new Producer("Pedro","123456","2"));
-        producers.add(new Producer("Jesus","123456","3"));
-        producers.add(new Producer("Judas","123456","4"));
-        producers.add(new Producer("Tadeu","123456","5"));
-        producers.add(new Producer("Caio","123456","6"));
+        producers.add(new Producer("Doao","1","1"));
+        producers.add(new Producer("Pedro","12","2"));
+        producers.add(new Producer("Jesus","123","3"));
+        producers.add(new Producer("Judas","1234","4"));
+        producers.add(new Producer("Tadeu","12","5"));
+        producers.add(new Producer("Caio","12","6"));
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -305,10 +381,12 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel label_availableAmount;
     private javax.swing.JLabel label_price;
+    private javax.swing.JList<String> list_producers;
     private javax.swing.JTextField tf_ProducerID;
     // End of variables declaration//GEN-END:variables
 

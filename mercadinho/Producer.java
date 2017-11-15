@@ -24,7 +24,7 @@ public class Producer {
         this.id = id;
     }
     
-    public List getProducts(){
+    public List<Product> getProducts(){
         return this.products;
     }
     
@@ -122,7 +122,7 @@ public class Producer {
     
     @Override
     public String toString(){
-        return this.name + "- " + this.cpf;
+        return this.name;
     }
     
     
