@@ -13,9 +13,10 @@ public class Product {
     private double amount;
     private double price;
     
-    public Product(String name, double amount){
+    public Product(String name, double amount,String id,double price){
         this.name = name;
         this.amount = amount;
+        this.id = id;
     }
 
     public String getName() {
@@ -57,5 +58,12 @@ public class Product {
        }
        return false;
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
+    
+    
     
 }
