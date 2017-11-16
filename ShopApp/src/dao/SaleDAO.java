@@ -51,8 +51,8 @@ public class SaleDAO implements saleDAOInterface{
     }
 
     @Override
-    public boolean delete(Sale sale) throws SaleDAOException {
-		   try{
+    public boolean delete(Sale sale) throws SaleDAOException {          
+        try{
 			pstm=ConnectionFactory.getConnection().prepareStatement("delete from sale where idSale=?");
                         pstm.setInt(1,sale.getId());
                         pstm.execute();

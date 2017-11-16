@@ -6,13 +6,11 @@
 package dao;
 
 import exceptions.ProducerDAOException;
-import exceptions.SaleDAOException;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import model.Producer;
-import model.Sale;
 
 /**
  *
@@ -25,7 +23,6 @@ public class ProducerDAO implements ProducerDAOInterface{
     public boolean insert(Producer producer) throws ProducerDAOException {
     try{
 			pstm=ConnectionFactory.getConnection().prepareStatement("INSERT INTO producer (idProducer,nameProducer,CPFProducer,cashProducer) values (null,?,?,?)");
-			pstm.setInt(0,producer.getId());
                         pstm.setString(1,producer.getName());
 			pstm.setString(2, producer.getCpf());
 			pstm.setDouble(3, producer.getCash());
@@ -40,14 +37,33 @@ public class ProducerDAO implements ProducerDAOInterface{
 
     @Override
     public boolean update(Producer producer) throws ProducerDAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+                try{
+                        pstm=ConnectionFactory.getConnection().prepareStatement("UPDATE producer SET  nameProducer=?, CPFProducer=?, cashProducer=? WHERE idProducer=?");
+                        pstm.setString(1,producer.getName());
+                        pstm.setString(2, producer.getCpf());
+                        pstm.setDouble(3, producer.getCash());
+                        pstm.setInt(4, producer.getId());
+			pstm.execute();
+			ConnectionFactory.closeConnection(pstm);
+			bRet=true;
+		}catch(Exception e){
+			throw new ProducerDAOException(e.getMessage());
+		}	
+                return bRet;    }    
 
     @Override
     public boolean delete(Producer producer) throws ProducerDAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          try{
+			pstm=ConnectionFactory.getConnection().prepareStatement("delete from producer where idProducer=?");
+                        pstm.setInt(1,producer.getId());
+                        pstm.execute();
+			ConnectionFactory.closeConnection(pstm);
+			bRet=true;
+	}catch(Exception e){
+			throw new ProducerDAOException(e.getMessage());
+	}
+	return bRet;        
     }
-
     @Override
     public boolean update(int idProducer) throws ProducerDAOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -84,7 +100,21 @@ public class ProducerDAO implements ProducerDAOInterface{
 
     @Override
     public Producer retriveByID(int id) throws ProducerDAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        Producer arRet = new Producer(); 
+		try{
+                                pstm=ConnectionFactory.getConnection().prepareStatement("SELECT * FROM producer where idProducer=?");
+                                pstm.setInt(1,id);
+                                ResultSet rs=pstm.executeQuery();
+                                rs.next();
+                                arRet = new Producer(rs.getInt("idProducer"),
+                                                    rs.getString("nameProducer"),
+                                                    rs.getString("CPFProducer"),
+                                                    rs.getInt("cashProducer"));
+                                
+                                ConnectionFactory.closeConnection(pstm,rs);
+                        }catch(Exception e){
+                                throw new ProducerDAOException(e.getMessage());
+                        }
+                       return arRet;    }
     
 }

@@ -10,7 +10,7 @@ public class ProducerDAOException extends Exception {
 	}
 
 	public ProducerDAOException(String message) {
-		super("Erro em SaleDAO "+message);
+		super("Erro em ProducerDAO "+message);
 		// TODO Auto-generated constructor stub
 	}
 
