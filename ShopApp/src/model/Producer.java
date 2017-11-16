@@ -13,18 +13,18 @@ public class Producer {
     private int id;
     private String name;
     private String cpf;
-    private double cash;
+    private float cash;
 
-    public Producer(int id,String name, String cpf,int cash) {
+    public Producer(int id,String name, String cpf,float cash) {
         this.name = name;
         this.cpf = cpf;
-        this.cash = 0;
+        this.cash = cash;
         this.id = id;
     }
-    public Producer(String name, String cpf,int cash) {
+    public Producer(String name, String cpf,float cash) {
         this.name = name;
         this.cpf = cpf;
-        this.cash = 0;
+        this.cash = cash;
         this.id = 0;
     }
     public Producer() {
@@ -156,14 +156,14 @@ public class Producer {
     /**
      * @return the cash
      */
-    public double getCash() {
+    public float getCash() {
         return cash;
     }
 
     /**
      * @param cash the cash to set
      */
-    public void setCash(double cash) {
+    public void setCash(float cash) {
         this.cash = cash;
     }
     

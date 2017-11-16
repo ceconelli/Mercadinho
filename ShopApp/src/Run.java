@@ -21,14 +21,12 @@ public class Run {
                 //EstadoCadastroView estado = new EstadoCadastroView("Estado",100,100,500,500);
 	//	estado.setVisible(true);
           //  	estado.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-                Sale s = new Sale(2, 3, new java.sql.Date(1));
+                Producer pd = new Producer(1,"1anao","112",2);
                 try{
                   //   EstadoDAO dao= new EstadoDAO();
-                       SaleDAO dao = new SaleDAO();
-                      // dao.update(s);
-                       
-                       System.out.println(dao.retriveByID(1).getAmount());
+                       ProducerDAO dao = new ProducerDAO();
+                       dao.delete(pd);
+                       System.out.println(dao.retriveByID(1).getName());
                        //e.insert(es);
               //      dao.insert(sale);
                 }catch(Exception e){
