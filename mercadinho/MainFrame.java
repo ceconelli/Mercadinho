@@ -34,9 +34,12 @@ public class MainFrame extends javax.swing.JFrame {
     DefaultTableModel tableModel;
     DefaultListModel model;
     DefaultComboBoxModel producersModel;
+    AddProducerFrame addProducerFrame;
     
     public MainFrame(List<Producer> producers) {
         initComponents();
+        this.addProducerFrame = new AddProducerFrame();
+        this.addProducerFrame.setVisible(false);
         
         this.cart = new DefaultListModel();
         Producer[] pd = new Producer[producers.size()];
@@ -65,6 +68,7 @@ public class MainFrame extends javax.swing.JFrame {
         
         this.table_products.setModel(tableModel);
         prod = producers;
+        
         
     }
 
@@ -99,7 +103,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
-        jPanel5 = new javax.swing.JPanel();
+        panel_Producers = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         tf_name = new javax.swing.JTextField();
@@ -285,6 +289,12 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Vendas", jPanel2);
 
+        jTabbedPane2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTabbedPane2MouseReleased(evt);
+            }
+        });
+
         jLabel4.setText("Produtores");
 
         jLabel8.setText("Nome:");
@@ -292,6 +302,11 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel9.setText("Código:");
 
         btn_addProducer.setText("Add Produtor");
+        btn_addProducer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btn_addProducerMouseReleased(evt);
+            }
+        });
 
         jScrollPane2.setViewportView(list_sales);
 
@@ -311,44 +326,48 @@ public class MainFrame extends javax.swing.JFrame {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
         });
+        cb_producers_Produtores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cb_producers_ProdutoresMouseEntered(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout panel_ProducersLayout = new javax.swing.GroupLayout(panel_Producers);
+        panel_Producers.setLayout(panel_ProducersLayout);
+        panel_ProducersLayout.setHorizontalGroup(
+            panel_ProducersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_ProducersLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(panel_ProducersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(59, 59, 59)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(panel_ProducersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btn_addProducer, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(cb_producers_Produtores, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tf_name, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(tf_id)
-                        .addComponent(btn_removeProducer, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)))
+                    .addComponent(cb_producers_Produtores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tf_name)
+                    .addComponent(tf_id, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btn_removeProducer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        panel_ProducersLayout.setVerticalGroup(
+            panel_ProducersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_ProducersLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panel_ProducersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_ProducersLayout.createSequentialGroup()
+                        .addGroup(panel_ProducersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(cb_producers_Produtores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(panel_ProducersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(tf_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(panel_ProducersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
                             .addComponent(tf_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(101, 101, 101)
@@ -356,12 +375,12 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGap(17, 17, 17)
                         .addComponent(btn_removeProducer)
                         .addContainerGap(14, Short.MAX_VALUE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGroup(panel_ProducersLayout.createSequentialGroup()
                         .addComponent(jScrollPane2)
                         .addContainerGap())))
         );
 
-        jTabbedPane2.addTab("Produtores", jPanel5);
+        jTabbedPane2.addTab("Produtores", panel_Producers);
 
         cb_Producer_produtos.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -406,6 +425,11 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         btn_addProduct.setText("Adicionar Produto");
+        btn_addProduct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btn_addProductMouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -552,8 +576,11 @@ public class MainFrame extends javax.swing.JFrame {
                 this.cb_Producer.setSelectedItem(p);
             }
         }
+        
     }//GEN-LAST:event_tf_ProducerIDFocusLost
-
+    
+    
+    
     private void cb_productItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_productItemStateChanged
         // TODO add your handling code here:
         Product p = (Product)this.cb_product.getSelectedItem();
@@ -640,6 +667,39 @@ public class MainFrame extends javax.swing.JFrame {
         }
         this.list_sales.setModel(model);
     }//GEN-LAST:event_cb_producers_ProdutoresPopupMenuWillBecomeInvisible
+
+    private void btn_addProducerMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addProducerMouseReleased
+        // TODO add your handling code here:
+        this.addProducerFrame.setVisible(true);
+        
+        
+    }//GEN-LAST:event_btn_addProducerMouseReleased
+
+    private void jTabbedPane2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane2MouseReleased
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jTabbedPane2MouseReleased
+
+    private void cb_producers_ProdutoresMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cb_producers_ProdutoresMouseEntered
+        // TODO add your handling code here:
+        if(this.addProducerFrame.getProducer() != null){
+            this.producersModel.addElement(this.addProducerFrame.getProducer());
+            this.prod.add(this.addProducerFrame.getProducer());
+            this.addProducerFrame.setProducer(null);
+        }
+//        this.producersModel.removeAllElements();
+//        this.cb_producers_Produtores.setModel(null);
+//        this.cb_producers_Produtores.removeAllItems();
+//        for(Producer p:this.prod){
+//            this.producersModel.addElement(p);
+//        }
+//        this.cb_producers_Produtores.setModel(producersModel);
+    }//GEN-LAST:event_cb_producers_ProdutoresMouseEntered
+
+    private void btn_addProductMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_addProductMouseReleased
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btn_addProductMouseReleased
     
     private Object[] getObjs(List<Object> list){
         Object[] objs = new Object[list.size()];
@@ -722,7 +782,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
@@ -736,6 +795,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel label_price;
     private javax.swing.JList<String> list_chart;
     private javax.swing.JList<String> list_sales;
+    private javax.swing.JPanel panel_Producers;
     private javax.swing.JTable table_products;
     private javax.swing.JTextField tf_ProducerID;
     private javax.swing.JTextField tf_id;
