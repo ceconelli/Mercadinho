@@ -1,6 +1,6 @@
 package model;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -9,7 +9,7 @@ import java.util.Date;
 public class Sale {
     private int id;
     private double amount;
-    private Date soldAt;
+    private  Date soldAt;
     public Sale() {
         this.id=0;
         this.amount = 0;
@@ -41,6 +41,20 @@ public class Sale {
 
     public void setSoldAt(Date soldAt) {
         this.soldAt = soldAt;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
     }
     
     

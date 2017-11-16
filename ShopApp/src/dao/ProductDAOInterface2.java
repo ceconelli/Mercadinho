@@ -1,12 +1,13 @@
 package dao;
 
+import dao.*;
 import java.util.ArrayList;
 
 import exceptions.ProductDAOException;
 import exceptions.ProductDAOException;
 import model.Product;
 
-public interface ProductDAOInterface {
+public interface ProductDAOInterface2 {
 	
 	public boolean insert(Product product) throws ProductDAOException;
 	public boolean update(Product product)throws ProductDAOException;
